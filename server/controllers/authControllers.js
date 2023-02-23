@@ -10,12 +10,9 @@ const register = async (req, res) => {
 	const { name, email, password } = req.body;
 	if (!name || !email || !password)
 		throw new BadRequestError("Name, email and password are required");
-	try {
-		const newUser = await User.create({ name, email, password });
-		res.status(StatusCodes.OK).json(newUser);
-	} catch (err) {
-		console.log(err);
-	}
+
+	const newUser = await User.create({ name, email, password });
+	res.status(StatusCodes.OK).json(newUser);
 };
 
 module.exports = { login, register };
