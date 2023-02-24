@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const User = require("../db/models/User");
+const AuthenticationError = require("../errors/AuthenticationError");
 const BadRequestError = require("../errors/BadRequestError");
 
 const login = async (req, res) => {
@@ -7,10 +8,10 @@ const login = async (req, res) => {
 	if (!email || !password) throw new BadRequestError("Email and password are required");
 
 	const user = await User.findOne({ email });
+	if (!user) throw new AuthenticationError("Invalid Credentials 0");
 
-	if (!user) throw new BadRequestError("Invalid Credentials 0");
 	const isPasswordCorrect = await user.checkPassword(password);
-	if (!isPasswordCorrect) throw new BadRequestError("Invalid Credentials 1");
+	if (!isPasswordCorrect) throw new AuthenticationError("Invalid Credentials 1");
 
 	res.status(StatusCodes.OK).json(user);
 };
