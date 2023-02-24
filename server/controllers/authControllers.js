@@ -3,7 +3,16 @@ const User = require("../db/models/User");
 const BadRequestError = require("../errors/BadRequestError");
 
 const login = async (req, res) => {
-	res.status(200).json({ msg: "Login successful" });
+	const { email, password } = req.body;
+	if (!email || !password) throw new BadRequestError("Email and password are required");
+
+	const user = await User.findOne({ email });
+
+	if (!user) throw new BadRequestError("Invalid Credentials 0");
+	const isPasswordCorrect = await user.checkPassword(password);
+	if (!isPasswordCorrect) throw new BadRequestError("Invalid Credentials 1");
+
+	res.status(StatusCodes.OK).json(user);
 };
 
 const register = async (req, res) => {
