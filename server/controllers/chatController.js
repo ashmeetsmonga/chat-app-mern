@@ -1,9 +1,13 @@
 const { StatusCodes } = require("http-status-codes");
 const Chat = require("../db/models/Chat");
+const BadRequestError = require("../errors/BadRequestError");
 
 const getChat = async (req, res) => {
 	const { userOneId, userTwoId } = req.params;
-	res.status(StatusCodes.OK).json({ userOneId, userTwoId });
+
+	const chat = await Chat.findOne({ members: { $all: [userOneId, userTwoId] } });
+	if (!chat) throw new BadRequestError("No chat found");
+	res.status(StatusCodes.OK).json(chat);
 };
 
 const createChat = async (req, res) => {
