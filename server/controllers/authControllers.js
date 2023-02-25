@@ -13,7 +13,9 @@ const login = async (req, res) => {
 	const isPasswordCorrect = await user.checkPassword(password);
 	if (!isPasswordCorrect) throw new AuthenticationError("Invalid Credentials 1");
 
-	res.status(StatusCodes.OK).json(user);
+	const token = user.createJWT();
+
+	res.status(StatusCodes.OK).json({ name: user.name, token });
 };
 
 const register = async (req, res) => {
@@ -22,7 +24,8 @@ const register = async (req, res) => {
 		throw new BadRequestError("Name, email and password are required");
 
 	const newUser = await User.create({ name, email, password });
-	res.status(StatusCodes.OK).json(newUser);
+	const token = newUser.createJWT();
+	res.status(StatusCodes.OK).json({ name, token });
 };
 
 module.exports = { login, register };
