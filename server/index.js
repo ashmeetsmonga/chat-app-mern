@@ -2,6 +2,7 @@ require("dotenv").config();
 require("./db/connectDb");
 require("express-async-errors");
 const express = require("express");
+const authMiddleware = require("./middleware/authMiddleware");
 const errorHandlerMiddleware = require("./middleware/errorHandlerMiddleware");
 const notFoundMiddleware = require("./middleware/notFoundMiddleware");
 const authRouter = require("./routes/authRoutes");
@@ -13,8 +14,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/auth", authRouter);
-app.use("/chat", chatRouter);
-app.use("/message", messageRouter);
+app.use("/chat", authMiddleware, chatRouter);
+app.use("/message", authMiddleware, messageRouter);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);

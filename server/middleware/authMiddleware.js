@@ -2,7 +2,7 @@ const AuthenticationError = require("../errors/AuthenticationError");
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
-	const authHeaders = req.headers.Authorization;
+	const authHeaders = req.headers.authorization;
 	if (!authHeaders || !authHeaders.startsWith("Bearer "))
 		throw new AuthenticationError("Token is missing");
 
@@ -15,3 +15,5 @@ const authMiddleware = async (req, res, next) => {
 		throw new AuthenticationError("Token verification failed");
 	}
 };
+
+module.exports = authMiddleware;
