@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 
 function App() {
-	const [count, setCount] = useState(0);
-
-	return <div className='text-4xl font-bold'>Chat App</div>;
+	return (
+		<>
+			<Routes>
+				<Route path='/' element={<Login />} />
+			</Routes>
+		</>
+	);
 }
 
 export default App;
