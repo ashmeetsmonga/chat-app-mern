@@ -17,4 +17,10 @@ const createChat = async (req, res) => {
 	res.status(StatusCodes.OK).json(newChat);
 };
 
-module.exports = { createChat, getChat };
+const getAllChats = async (req, res) => {
+	const { userId } = req.user;
+	const chats = await Chat.find({ members: { $in: [userId] } });
+	res.status(StatusCodes.OK).json(chats);
+};
+
+module.exports = { createChat, getChat, getAllChats };
