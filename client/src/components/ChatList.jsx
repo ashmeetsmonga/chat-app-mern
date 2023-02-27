@@ -1,7 +1,19 @@
+import axios from "axios";
 import React from "react";
 import { RiAddFill } from "react-icons/ri";
+import { useQuery } from "react-query";
 
 const ChatList = () => {
+	const { data, isLoading } = useQuery(["chats"], async () => {
+		const { data } = await axios.get("http://localhost:5000/chat/", {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
+			},
+		});
+		console.log(data);
+		return data;
+	});
+
 	return (
 		<div className='w-full h-full flex flex-col gap-8 bg-red-700'>
 			<div className='w-full p-4 flex flex-col gap-4 items-center'>
