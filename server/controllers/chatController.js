@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const Chat = require("../db/models/Chat");
+const User = require("../db/models/User");
 const BadRequestError = require("../errors/BadRequestError");
 
 const getChat = async (req, res) => {
@@ -20,7 +21,20 @@ const createChat = async (req, res) => {
 const getAllChats = async (req, res) => {
 	const { userId } = req.user;
 	const chats = await Chat.find({ members: { $in: [userId] } });
-	res.status(StatusCodes.OK).json(chats);
+	const data = [];
+
+	for (let chat of chats) {
+		for (let memberId of chat.members) {
+			if (memberId !== userId) {
+				const otherUser = await User.findOne({ _id: memberId });
+				const chatObj = {};
+				chatObj.name = otherUser.name;
+				chatObj._id = chat._id;
+				data.push(chatObj);
+			}
+		}
+	}
+	res.status(StatusCodes.OK).json(data);
 };
 
 module.exports = { createChat, getChat, getAllChats };
