@@ -32,7 +32,10 @@ const ChatList = () => {
 
 	const addNewChat = (e) => {
 		e.preventDefault();
-		console.log("form submitted");
+		if (!email) {
+			console.log("Please provide email");
+			return;
+		}
 		mutate();
 	};
 
