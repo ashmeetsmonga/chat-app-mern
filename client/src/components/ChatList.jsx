@@ -2,33 +2,16 @@ import axios from "axios";
 import React, { useState } from "react";
 import { RiAddFill } from "react-icons/ri";
 import { useMutation, useQuery } from "react-query";
+import { useCreateNewChat } from "../api/useCreateNewChat";
+import { useGetAllChats } from "../api/useGetAllChats";
 import ChatListItem from "./ChatListItem";
 
 const ChatList = () => {
 	const [email, setEmail] = useState("");
 
-	const { data, isLoading } = useQuery(["chats"], async () => {
-		const { data } = await axios.get("http://localhost:5000/chat/", {
-			headers: {
-				Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
-			},
-		});
-		return data;
-	});
+	const { data, isLoading } = useGetAllChats();
 
-	const { mutate } = useMutation(async () => {
-		const { data } = await axios.post(
-			"http://localhost:5000/chat/",
-			{ email },
-			{
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
-				},
-			}
-		);
-		console.log(data);
-		return data;
-	});
+	const { mutate: createNewChatMutation } = useCreateNewChat();
 
 	const addNewChat = (e) => {
 		e.preventDefault();
@@ -36,7 +19,8 @@ const ChatList = () => {
 			console.log("Please provide email");
 			return;
 		}
-		mutate();
+		createNewChatMutation({ email });
+		setEmail("");
 	};
 
 	return (
