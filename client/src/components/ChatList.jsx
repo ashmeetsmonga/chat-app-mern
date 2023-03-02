@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { RiAddFill } from "react-icons/ri";
 import { useMutation, useQuery } from "react-query";
-import { useCreateNewChat } from "../api/useCreateNewChat";
-import { useGetAllChats } from "../api/useGetAllChats";
+import { useCreateNewChat } from "../api/query-hooks/useCreateNewChat";
+import { useGetAllChats } from "../api/query-hooks/useGetAllChats";
 import ChatListItem from "./ChatListItem";
 
 const ChatList = () => {
