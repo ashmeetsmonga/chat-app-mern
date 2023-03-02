@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { RiAddFill } from "react-icons/ri";
 import { useQuery } from "react-query";
+import ChatListItem from "./ChatListItem";
 
 const ChatList = () => {
 	const { data, isLoading } = useQuery(["chats"], async () => {
@@ -10,12 +11,13 @@ const ChatList = () => {
 				Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
 			},
 		});
-		console.log(data);
 		return data;
 	});
 
+	console.log(data);
+
 	return (
-		<div className='w-full h-full flex flex-col gap-8 bg-red-700'>
+		<div className='w-full h-full flex flex-col gap-8 bg-red-700 pt-8'>
 			<div className='w-full p-4 flex flex-col gap-4 items-center'>
 				<form className='w-full flex justify-center relative'>
 					<input
@@ -23,12 +25,16 @@ const ChatList = () => {
 						type='text'
 						placeholder='Create New Chat (Email)'
 					/>
-					<button className='-ml-12' type='submit'>
+					{/* <button className='-ml-12' type='submit'>
 						<RiAddFill className='w-10 h-10 text-red-700' />
-					</button>
+					</button> */}
 				</form>
 			</div>
-			<div></div>
+			<div className='flex flex-col'>
+				{data?.map((chat) => (
+					<ChatListItem key={chat._id} chatData={chat} />
+				))}
+			</div>
 		</div>
 	);
 };
