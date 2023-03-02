@@ -2,7 +2,6 @@ import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 
 const ChatListItem = ({ chatData }) => {
-	console.log(chatData);
 	return (
 		<div className='flex py-2 px-8 gap-6 items-center border-b border-b-gray-100'>
 			<div>

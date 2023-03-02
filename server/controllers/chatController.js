@@ -12,8 +12,11 @@ const getChat = async (req, res) => {
 };
 
 const createChat = async (req, res) => {
-	const { userOneId, userTwoId } = req.params;
-
+	const userOneId = req.user.userId;
+	const { email } = req.body;
+	const user = await User.findOne({ email });
+	const userTwoId = user._id;
+	console.log(userOneId, userTwoId);
 	const newChat = await Chat.create({ members: [userOneId, userTwoId] });
 	res.status(StatusCodes.OK).json(newChat);
 };
