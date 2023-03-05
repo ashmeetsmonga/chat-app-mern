@@ -10,10 +10,10 @@ const ChatListItem = ({ chatData, randomColor }) => {
 				<BsFillPersonFill className='w-6 h-6 text-white' />
 			</div>
 			<div>
-				<div className='text-white capitalize text-xl'>{chatData.name}</div>
+				<div className='text-white text-lg capitalize'>{chatData.name}</div>
 				<div className='text-sm tracking-wide text-gray-400'>Last Message</div>
 			</div>
-			<div className='ml-auto text-gray-300 mt-1'>10:30</div>
+			<div className='ml-auto text-sm text-gray-300 mt-1'>10:30</div>
 		</div>
 	);
 };

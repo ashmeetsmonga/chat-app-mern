@@ -42,7 +42,9 @@ const ChatList = () => {
 						<BsFillPersonFill className='w-6 h-6 text-white' />
 					</div>
 					<div className=''>
-						<div className='text-white text-lg font-[500]'>Ashmeet Singh</div>
+						<div className='text-white text-lg font-[500] capitalize'>
+							{localStorage.getItem("chat-app-name")}
+						</div>
 						<div className='text-gray-400 text-md'>My Account</div>
 					</div>
 				</div>
