@@ -1,10 +1,10 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 
-const ChatListItem = ({ chatData }) => {
+const ChatListItem = ({ chatData, randomColor }) => {
 	return (
 		<div className='flex py-2 px-8 gap-6 items-center border-b border-b-gray-100'>
-			<div>
+			<div className={`p-4 ${randomColor} rounded-full `}>
 				<BsFillPersonFill className='w-10 h-10 text-white' />
 			</div>
 			<div>

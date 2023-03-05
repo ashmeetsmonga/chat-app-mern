@@ -8,6 +8,15 @@ import ChatListItem from "./ChatListItem";
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
 
+const randomColor = [
+	"bg-red-500",
+	"bg-blue-500",
+	"bg-green-500",
+	"bg-orange-500",
+	"bg-purple-500",
+	"bg-teal-500",
+];
+
 const ChatList = () => {
 	const [email, setEmail] = useState("");
 
@@ -59,7 +68,11 @@ const ChatList = () => {
 			<div className='flex flex-col'>
 				<div className='text-xl text-white px-6 py-2'>Messages</div>
 				{data?.map((chat) => (
-					<ChatListItem key={chat._id} chatData={chat} />
+					<ChatListItem
+						key={chat._id}
+						chatData={chat}
+						randomColor={randomColor[Math.floor(Math.random() * randomColor.length)]}
+					/>
 				))}
 			</div>
 		</div>
