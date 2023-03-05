@@ -26,7 +26,7 @@ const ChatList = () => {
 	};
 
 	return (
-		<div className='w-full h-full flex flex-col gap-4 bg-[#161B1D]'>
+		<div className='w-full h-full flex flex-col bg-[#161B1D]'>
 			<div className='flex justify-between p-6 items-center border border-gray-700 border-l-0 border-t-0'>
 				<div className='flex gap-6 items-center'>
 					<div className='rounded-full p-3 bg-purple-500'>
@@ -39,7 +39,7 @@ const ChatList = () => {
 				</div>
 				<AiOutlineLogout className='w-9 h-9 text-gray-500 cursor-pointer hover:text-white transition-colors' />
 			</div>
-			<div className='w-full flex flex-col gap-4 p-6 items-center'>
+			<div className='w-full flex flex-col p-6 items-center'>
 				<form className='w-full flex justify-center relative' onSubmit={addNewChat}>
 					<label className='relative w-full focus-within:text-white'>
 						<RiSearch2Line className='absolute w-8 h-8 top-1/2 -translate-y-1/2 left-3 pointer-events-none text-[#595D5D] ' />
@@ -56,11 +56,12 @@ const ChatList = () => {
 					</button> */}
 				</form>
 			</div>
-			{/* <div className='flex flex-col'>
+			<div className='flex flex-col'>
+				<div className='text-xl text-white px-6 py-2'>Messages</div>
 				{data?.map((chat) => (
 					<ChatListItem key={chat._id} chatData={chat} />
 				))}
-			</div> */}
+			</div>
 		</div>
 	);
 };
