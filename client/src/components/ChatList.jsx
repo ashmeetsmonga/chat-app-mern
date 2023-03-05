@@ -35,8 +35,8 @@ const ChatList = () => {
 	};
 
 	return (
-		<div className='w-full h-full flex flex-col bg-[#161B1D]'>
-			<div className='flex justify-between p-6 items-center border border-gray-700 border-l-0 border-t-0'>
+		<div className='w-full h-full flex flex-col bg-[#161B1D] border-r-2 border-[#1F2126]'>
+			<div className='flex justify-between p-6 items-center border-b-2 border-[#1F2126]'>
 				<div className='flex gap-6 items-center'>
 					<div className='rounded-full p-3 bg-purple-500'>
 						<BsFillPersonFill className='w-6 h-6 text-white' />
@@ -55,7 +55,7 @@ const ChatList = () => {
 					<label className='relative w-full focus-within:text-white'>
 						<RiSearch2Line className='absolute w-8 h-8 top-1/2 -translate-y-1/2 left-3 pointer-events-none text-[#595D5D] ' />
 						<input
-							className='w-full text-white p-4 pl-14 rounded-xl bg-[#1D2122] border placeholder:text-[#595D5D] border-gray-700 outline-none'
+							className='w-full text-white p-4 pl-14 rounded-xl bg-[#1D2122]  placeholder:text-[#595D5D] border-[#1F2126] outline-none'
 							type='text'
 							placeholder='Create New Chat (Email)...'
 							value={email}
@@ -69,11 +69,11 @@ const ChatList = () => {
 			</div>
 			<div className='flex flex-col'>
 				<div className='text-xl text-white px-6 py-2'>Messages</div>
-				{data?.map((chat) => (
+				{data?.map((chat, idx) => (
 					<ChatListItem
 						key={chat._id}
 						chatData={chat}
-						randomColor={randomColor[Math.floor(Math.random() * randomColor.length)]}
+						randomColor={randomColor[idx % randomColor.length]}
 					/>
 				))}
 			</div>
