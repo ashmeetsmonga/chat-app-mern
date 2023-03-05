@@ -5,10 +5,10 @@ import ChatList from "./ChatList";
 const Layout = () => {
 	return (
 		<div className='w-full h-full flex'>
-			<div className='w-1/4'>
+			<div className='w-[30%]'>
 				<ChatList />
 			</div>
-			<div className='w-3/4'>
+			<div className='w-[70%]'>
 				<Chat />
 			</div>
 		</div>
