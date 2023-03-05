@@ -35,6 +35,7 @@ const getAllChats = async (req, res) => {
 				const chatObj = {};
 				chatObj.name = otherUser.name;
 				chatObj._id = chat._id;
+				console.log(chat);
 				data.push(chatObj);
 			}
 		}
