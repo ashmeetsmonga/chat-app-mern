@@ -2,9 +2,10 @@ import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 
 const ChatListItem = ({ chatData, randomColor }) => {
-	console.log(chatData);
+	const updatedDate = new Date(chatData.updatedAt);
+
 	return (
-		<div className='flex py-4 px-6 gap-6 items-center'>
+		<div className='flex py-4 px-6 gap-6'>
 			<div className={`p-3 ${randomColor} rounded-full `}>
 				<BsFillPersonFill className='w-6 h-6 text-white' />
 			</div>
@@ -12,6 +13,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 				<div className='text-white capitalize text-xl'>{chatData.name}</div>
 				<div className='text-sm tracking-wide text-gray-400'>Last Message</div>
 			</div>
+			<div className='ml-auto text-gray-300 mt-1'>10:30</div>
 		</div>
 	);
 };
