@@ -9,4 +9,27 @@
     html {
         font-family: 'Poppins', sans-serif;
     }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #0C1011;
+
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #161B1D;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #212629;
+    }
 }
