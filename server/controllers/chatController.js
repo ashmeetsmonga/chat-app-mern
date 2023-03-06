@@ -17,8 +17,7 @@ const createChat = async (req, res) => {
 
 	const user = await User.findOne({ email });
 	if (!user) throw new BadRequestError("Email not found");
-
-	const userTwoId = user._id;
+	const userTwoId = user._id.toString();
 	const newChat = await Chat.create({ members: [userOneId, userTwoId] });
 	res.status(StatusCodes.OK).json(newChat);
 };
