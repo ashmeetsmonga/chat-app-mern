@@ -7,17 +7,41 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useGetAllMessages } from "../api/query-hooks/useGetAllMessages";
 import Message from "./Message";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
 
 const Chat = () => {
 	const [message, setMessage] = useState("");
 
-	const { userId } = useContext(Context);
-	const { chatId } = useContext(Context);
-	console.log("Chat rendered", chatId);
-
+	const { userId, chatId } = useContext(Context);
+	console.log(userId);
 	const { data } = useGetAllMessages({ chatId });
+	const queryClient = useQueryClient();
 
-	console.log(data);
+	const { mutate } = useMutation(
+		async () => {
+			const { data } = await axios.post(
+				"http://localhost:5000/message/",
+				{ senderId: userId, chatId, text: message },
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
+					},
+				}
+			);
+			return data;
+		},
+		{
+			onSettled: () => {
+				queryClient.refetchQueries(["messages-list", chatId]);
+			},
+		}
+	);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		mutate();
+	};
 
 	return (
 		<div className='w-full h-full bg-[#0C1011] flex flex-col justify-between relative'>
@@ -43,7 +67,7 @@ const Chat = () => {
 				))}
 			</div>
 			<div className='w-full bottom-0 py-6 px-8 bg-[#161B1D]'>
-				<form className='w-full flex gap-4 relative'>
+				<form className='w-full flex gap-4 relative' onSubmit={handleSubmit}>
 					<label className='relative w-full focus-within:text-white'>
 						<input
 							className='w-full text-white p-4 rounded-xl bg-[#1D2122]  placeholder:text-[#595D5D] border-[#1F2126] outline-none'

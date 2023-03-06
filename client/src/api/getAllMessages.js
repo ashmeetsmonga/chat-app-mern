@@ -6,6 +6,5 @@ export const getAllMessages = async (chatId) => {
 			Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
 		},
 	});
-	console.log(data);
 	return data;
 };
