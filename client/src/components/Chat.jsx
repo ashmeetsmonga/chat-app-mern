@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useGetAllMessages } from "../api/query-hooks/useGetAllMessages";
+import Message from "./Message";
 
 const Chat = () => {
 	const [message, setMessage] = useState("");
@@ -36,7 +37,11 @@ const Chat = () => {
 					<BiDotsVerticalRounded className='w-7 h-7' />
 				</div>
 			</div>
-			<div className='text-white outline outline-white h-full'>Chat messages</div>
+			<div className='text-white  h-full flex flex-col items-start gap-8 p-4'>
+				{data?.map((message) => (
+					<Message key={message._id} senderId={message.senderId} text={message.text} />
+				))}
+			</div>
 			<div className='w-full bottom-0 py-6 px-8 bg-[#161B1D]'>
 				<form className='w-full flex gap-4 relative'>
 					<label className='relative w-full focus-within:text-white'>
