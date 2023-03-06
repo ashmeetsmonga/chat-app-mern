@@ -4,13 +4,16 @@ import App from "./App";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+import ContextProvider from "./ContextProvider";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<BrowserRouter>
 		<QueryClientProvider client={queryClient}>
-			<App />
+			<ContextProvider>
+				<App />
+			</ContextProvider>
 		</QueryClientProvider>
 	</BrowserRouter>
 );

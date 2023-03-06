@@ -3,7 +3,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 
 const ChatListItem = ({ chatData, randomColor }) => {
 	const updatedDate = new Date(chatData.updatedAt);
-
+	console.log(chatData);
 	return (
 		<div className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'>
 			<div className={`p-3 ${randomColor} rounded-full `}>
