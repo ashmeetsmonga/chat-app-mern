@@ -41,6 +41,7 @@ const Chat = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		mutate();
+		setMessage("");
 	};
 
 	return (
