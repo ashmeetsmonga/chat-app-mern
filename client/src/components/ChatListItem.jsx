@@ -5,7 +5,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 	const updatedDate = new Date(chatData.updatedAt);
 
 	return (
-		<div className='flex py-4 px-6 gap-6'>
+		<div className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'>
 			<div className={`p-3 ${randomColor} rounded-full `}>
 				<BsFillPersonFill className='w-6 h-6 text-white' />
 			</div>
