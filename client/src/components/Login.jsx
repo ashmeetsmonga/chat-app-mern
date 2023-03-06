@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { Context } from "../ContextProvider";
 
 const Login = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
+	const { setUserId } = useContext(Context);
+
 	const onLoginSubmit = async (e) => {
 		e.preventDefault();
 		const { data } = await axios.post("http://localhost:5000/auth/login", { email, password });
+		console.log(data);
+		setUserId(data.userId);
 		localStorage.setItem("chat-app-token", data.token);
 		localStorage.setItem("chat-app-name", data.name);
 		navigate("/");
