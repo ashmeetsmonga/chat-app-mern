@@ -25,6 +25,7 @@ const Chat = () => {
 					<BiDotsVerticalRounded className='w-7 h-7' />
 				</div>
 			</div>
+			<div className='text-white outline outline-white h-full'>Chat messages</div>
 			<div className='w-full bottom-0 py-6 px-8 bg-[#161B1D]'>
 				<form className='w-full flex gap-4 relative'>
 					<label className='relative w-full focus-within:text-white'>
