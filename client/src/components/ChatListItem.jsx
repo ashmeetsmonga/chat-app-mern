@@ -1,11 +1,15 @@
 import React from "react";
+import { useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
+import { Context } from "../ContextProvider";
 
 const ChatListItem = ({ chatData, randomColor }) => {
-	const updatedDate = new Date(chatData.updatedAt);
-	console.log(chatData);
+	const { setChatId } = useContext(Context);
 	return (
-		<div className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'>
+		<div
+			className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'
+			onClick={() => setChatId(chatData._id)}
+		>
 			<div className={`p-3 ${randomColor} rounded-full `}>
 				<BsFillPersonFill className='w-6 h-6 text-white' />
 			</div>

@@ -5,12 +5,18 @@ import { RiSendPlaneFill, RiSearch2Line } from "react-icons/ri";
 import { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
+import { useGetAllMessages } from "../api/query-hooks/useGetAllMessages";
 
 const Chat = () => {
 	const [message, setMessage] = useState("");
 
 	const { userId } = useContext(Context);
-	console.log(userId);
+	const { chatId } = useContext(Context);
+	console.log("Chat rendered", chatId);
+
+	const { data } = useGetAllMessages({ chatId });
+
+	console.log(data);
 
 	return (
 		<div className='w-full h-full bg-[#0C1011] flex flex-col justify-between relative'>
