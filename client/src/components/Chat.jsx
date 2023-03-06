@@ -62,7 +62,7 @@ const Chat = () => {
 					<BiDotsVerticalRounded className='w-7 h-7' />
 				</div>
 			</div>
-			<div className='text-white  h-full flex flex-col items-start gap-8 p-4'>
+			<div className='text-white  h-full flex flex-col-reverse items-start gap-8 p-4 overflow-y-auto'>
 				{data?.map((message) => (
 					<Message key={message._id} senderId={message.senderId} text={message.text} />
 				))}
