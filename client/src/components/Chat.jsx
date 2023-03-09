@@ -14,7 +14,6 @@ const Chat = () => {
 	const [message, setMessage] = useState("");
 
 	const { userId, chatId, chatUserName } = useContext(Context);
-	console.log(userId);
 	const { data } = useGetAllMessages({ chatId });
 	const queryClient = useQueryClient();
 

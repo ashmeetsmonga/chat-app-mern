@@ -21,7 +21,7 @@ const createMessage = async (req, res) => {
 		{ replace: true }
 	);
 	console.log(chat);
-	Chat.res.status(StatusCodes.OK).json(newMessage);
+	res.status(StatusCodes.OK).json(newMessage);
 };
 
 module.exports = { getMessages, createMessage };
