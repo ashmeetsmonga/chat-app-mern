@@ -5,6 +5,16 @@ import { Context } from "../ContextProvider";
 
 const ChatListItem = ({ chatData, randomColor }) => {
 	const { setChatId, setChatUserName } = useContext(Context);
+
+	let latestMessage = chatData.latestMessage;
+
+	if (latestMessage) {
+		const len = latestMessage.length;
+		if (len > 30) {
+			latestMessage = latestMessage.substring(0, 30) + "...";
+		}
+	}
+
 	return (
 		<div
 			className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'
@@ -18,7 +28,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 			</div>
 			<div>
 				<div className='text-white text-lg capitalize'>{chatData.name}</div>
-				<div className='text-sm tracking-wide text-gray-400'>{chatData.latestMessage}</div>
+				<div className='text-sm tracking-wide text-gray-400'>{latestMessage}</div>
 			</div>
 			<div className='ml-auto text-sm text-gray-300 mt-1'>10:30</div>
 		</div>
