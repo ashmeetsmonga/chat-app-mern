@@ -1,4 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
+const Chat = require("../db/models/Chat");
 const Message = require("../db/models/Message");
 const BadRequestError = require("../errors/BadRequestError");
 
@@ -13,7 +14,14 @@ const createMessage = async (req, res) => {
 	console.log(senderId, chatId, text);
 	if (!senderId || !chatId || !text) throw new BadRequestError("Fields are missing");
 	const newMessage = await Message.create({ chatId, senderId, text });
-	res.status(StatusCodes.OK).json(newMessage);
+
+	const chat = await Chat.findOneAndUpdate(
+		{ _id: chatId },
+		{ latestMessage: text },
+		{ replace: true }
+	);
+	console.log(chat);
+	Chat.res.status(StatusCodes.OK).json(newMessage);
 };
 
 module.exports = { getMessages, createMessage };

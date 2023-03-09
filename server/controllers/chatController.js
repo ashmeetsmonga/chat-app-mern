@@ -35,6 +35,7 @@ const getAllChats = async (req, res) => {
 				chatObj.name = otherUser.name;
 				chatObj._id = chat._id;
 				chatObj.updatedAt = chat.updatedAt;
+				chatObj.latestMessage = chat.latestMessage || "Test";
 				data.push(chatObj);
 			}
 		}
