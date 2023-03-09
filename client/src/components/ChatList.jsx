@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { RiAddFill, RiSearch2Line } from "react-icons/ri";
-import { useMutation, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { RiSearch2Line } from "react-icons/ri";
 import { useCreateNewChat } from "../api/query-hooks/useCreateNewChat";
 import { useGetAllChats } from "../api/query-hooks/useGetAllChats";
 import ChatListItem from "./ChatListItem";
@@ -21,7 +21,7 @@ const ChatList = () => {
 	const [email, setEmail] = useState("");
 
 	const { data, isLoading } = useGetAllChats();
-
+	const navigate = useNavigate();
 	const { mutate: createNewChatMutation } = useCreateNewChat();
 
 	const addNewChat = (e) => {
@@ -32,6 +32,12 @@ const ChatList = () => {
 		}
 		createNewChatMutation({ email });
 		setEmail("");
+	};
+
+	const signOut = () => {
+		localStorage.clear("chat-app-token");
+		localStorage.clear("chat-app-name");
+		navigate("/login");
 	};
 
 	return (
@@ -48,7 +54,10 @@ const ChatList = () => {
 						<div className='text-gray-400 text-md'>My Account</div>
 					</div>
 				</div>
-				<AiOutlineLogout className='w-9 h-9 text-gray-500 cursor-pointer hover:text-white transition-colors' />
+				<AiOutlineLogout
+					onClick={signOut}
+					className='w-9 h-9 text-gray-500 cursor-pointer hover:text-white transition-colors'
+				/>
 			</div>
 			<div className='w-full flex flex-col p-6 items-center'>
 				<form className='w-full flex justify-center relative' onSubmit={addNewChat}>
