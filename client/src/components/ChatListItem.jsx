@@ -18,7 +18,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 			</div>
 			<div>
 				<div className='text-white text-lg capitalize'>{chatData.name}</div>
-				<div className='text-sm tracking-wide text-gray-400'>Last Message</div>
+				<div className='text-sm tracking-wide text-gray-400'>{chatData.latestMessage}</div>
 			</div>
 			<div className='ml-auto text-sm text-gray-300 mt-1'>10:30</div>
 		</div>

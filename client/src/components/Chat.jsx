@@ -33,6 +33,7 @@ const Chat = () => {
 		{
 			onSettled: () => {
 				queryClient.refetchQueries(["messages-list", chatId]);
+				queryClient.refetchQueries("chat-list");
 			},
 		}
 	);
