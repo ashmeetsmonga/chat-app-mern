@@ -13,7 +13,7 @@ import axios from "axios";
 const Chat = () => {
 	const [message, setMessage] = useState("");
 
-	const { userId, chatId } = useContext(Context);
+	const { userId, chatId, chatUserName } = useContext(Context);
 	console.log(userId);
 	const { data } = useGetAllMessages({ chatId });
 	const queryClient = useQueryClient();
@@ -52,9 +52,7 @@ const Chat = () => {
 						<BsFillPersonFill className='w-6 h-6 text-white' />
 					</div>
 					<div className=''>
-						<div className='text-white text-lg font-[500] capitalize'>
-							{localStorage.getItem("chat-app-name")}
-						</div>
+						<div className='text-white text-lg font-[500] capitalize'>{chatUserName}</div>
 						<div className='text-gray-400 text-md'>Last Message</div>
 					</div>
 				</div>

@@ -4,11 +4,14 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { Context } from "../ContextProvider";
 
 const ChatListItem = ({ chatData, randomColor }) => {
-	const { setChatId } = useContext(Context);
+	const { setChatId, setChatUserName } = useContext(Context);
 	return (
 		<div
 			className='flex py-4 px-6 gap-6 cursor-pointer hover:bg-[#212629]'
-			onClick={() => setChatId(chatData._id)}
+			onClick={() => {
+				setChatId(chatData._id);
+				setChatUserName(chatData.name);
+			}}
 		>
 			<div className={`p-3 ${randomColor} rounded-full `}>
 				<BsFillPersonFill className='w-6 h-6 text-white' />
