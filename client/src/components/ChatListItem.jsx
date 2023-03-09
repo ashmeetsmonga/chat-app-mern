@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Context } from "../ContextProvider";
 
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 const getLatestMessage = (latestMessage) => {
 	if (latestMessage) {
 		const len = latestMessage.length;
@@ -13,10 +15,23 @@ const getLatestMessage = (latestMessage) => {
 	return latestMessage;
 };
 
+const getTime = (time) => {
+	const date = time.getDate();
+	if (date !== new Date().getDate()) {
+		const month = months[time.getMonth() - 1];
+		return `${date} ${month}`;
+	}
+};
+
 const ChatListItem = ({ chatData, randomColor }) => {
 	const { setChatId, setChatUserName } = useContext(Context);
 
 	let latestMessage = getLatestMessage(chatData.latestMessage);
+
+	const updatedTime = new Date(chatData.updatedAt);
+
+	const timeToShow = getTime(updatedTime);
+	console.log(timeToShow);
 
 	return (
 		<div
@@ -33,7 +48,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 				<div className='text-white text-lg capitalize'>{chatData.name}</div>
 				<div className='text-sm tracking-wide text-gray-400'>{latestMessage}</div>
 			</div>
-			<div className='ml-auto text-sm text-gray-300 mt-1'>10:30</div>
+			<div className='ml-auto text-sm text-gray-300 mt-1'>{timeToShow}</div>
 		</div>
 	);
 };
