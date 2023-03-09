@@ -41,8 +41,14 @@ const Chat = () => {
 			</div>
 			<div className='text-white  h-full flex flex-col-reverse items-start gap-8 p-4 overflow-y-auto'>
 				{data?.map((message) => {
-					console.log(message);
-					return <Message key={message._id} senderId={message.senderId} text={message.text} />;
+					return (
+						<Message
+							key={message._id}
+							senderId={message.senderId}
+							text={message.text}
+							createdAt={message.createdAt}
+						/>
+					);
 				})}
 			</div>
 			<div className='w-full bottom-0 py-6 px-8 bg-[#161B1D]'>

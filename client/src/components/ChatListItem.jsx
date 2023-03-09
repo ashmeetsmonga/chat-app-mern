@@ -21,7 +21,6 @@ const getTime = (time) => {
 		const month = months[time.getMonth() - 1];
 		return `${date} ${month}`;
 	} else {
-		console.log(time.getHours(), time.getMinutes());
 		const hours = time.getHours() < 10 ? `0${time.getHours()}` : `${time.getHours()}`;
 		const minutes = time.getMinutes() < 10 ? `0${time.getMinutes()}` : `${time.getMinutes()}`;
 		return `${hours}:${minutes}`;
