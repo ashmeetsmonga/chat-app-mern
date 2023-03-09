@@ -3,17 +3,20 @@ import { useContext } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Context } from "../ContextProvider";
 
-const ChatListItem = ({ chatData, randomColor }) => {
-	const { setChatId, setChatUserName } = useContext(Context);
-
-	let latestMessage = chatData.latestMessage;
-
+const getLatestMessage = (latestMessage) => {
 	if (latestMessage) {
 		const len = latestMessage.length;
 		if (len > 30) {
 			latestMessage = latestMessage.substring(0, 30) + "...";
 		}
 	}
+	return latestMessage;
+};
+
+const ChatListItem = ({ chatData, randomColor }) => {
+	const { setChatId, setChatUserName } = useContext(Context);
+
+	let latestMessage = getLatestMessage(chatData.latestMessage);
 
 	return (
 		<div
