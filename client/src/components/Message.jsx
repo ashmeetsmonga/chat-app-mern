@@ -29,14 +29,14 @@ const Message = ({ senderId, text, createdAt }) => {
 		return (
 			<div className='ml-auto flex flex-col'>
 				<div className='bg-[#339DBB] p-4 rounded-xl rounded-tr-none relative'>{text}</div>
-				<div className='ml-auto mr-2'>{timeToShow}</div>
+				<div className='ml-auto mr-2 mt-0.5 text-gray-400 text-sm'>{timeToShow}</div>
 			</div>
 		);
 	else
 		return (
 			<div>
 				<div className='bg-[#212629] p-4 rounded-xl rounded-tl-none'>{text}</div>
-				<div className='ml-2'>{timeToShow}</div>
+				<div className='ml-2 mt-0.5 text-gray-400 text-sm'>{timeToShow}</div>
 			</div>
 		);
 };
