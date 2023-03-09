@@ -20,6 +20,11 @@ const getTime = (time) => {
 	if (date !== new Date().getDate()) {
 		const month = months[time.getMonth() - 1];
 		return `${date} ${month}`;
+	} else {
+		console.log(time.getHours(), time.getMinutes());
+		const hours = time.getHours() < 10 ? `0${time.getHours()}` : `${time.getHours()}`;
+		const minutes = time.getMinutes() < 10 ? `0${time.getMinutes()}` : `${time.getMinutes()}`;
+		return `${hours}:${minutes}`;
 	}
 };
 
@@ -29,9 +34,7 @@ const ChatListItem = ({ chatData, randomColor }) => {
 	let latestMessage = getLatestMessage(chatData.latestMessage);
 
 	const updatedTime = new Date(chatData.updatedAt);
-
 	const timeToShow = getTime(updatedTime);
-	console.log(timeToShow);
 
 	return (
 		<div
