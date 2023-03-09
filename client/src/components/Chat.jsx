@@ -1,46 +1,25 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { RiSendPlaneFill, RiSearch2Line } from "react-icons/ri";
+import { RiSendPlaneFill } from "react-icons/ri";
 import { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useGetAllMessages } from "../api/query-hooks/useGetAllMessages";
 import Message from "./Message";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import { useCreateNewMessage } from "../api/query-hooks/useCreateNewMessage";
 
 const Chat = () => {
 	const [message, setMessage] = useState("");
 
 	const { userId, chatId, chatUserName } = useContext(Context);
 	const { data } = useGetAllMessages({ chatId });
-	const queryClient = useQueryClient();
 
-	const { mutate } = useMutation(
-		async () => {
-			const { data } = await axios.post(
-				"http://localhost:5000/message/",
-				{ senderId: userId, chatId, text: message },
-				{
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("chat-app-token")}`,
-					},
-				}
-			);
-			return data;
-		},
-		{
-			onSettled: () => {
-				queryClient.refetchQueries(["messages-list", chatId]);
-				queryClient.refetchQueries("chat-list");
-			},
-		}
-	);
+	const { mutate: createNewMessageMutation } = useCreateNewMessage();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		mutate();
+		createNewMessageMutation({ userId, chatId, message });
 		setMessage("");
 	};
 
